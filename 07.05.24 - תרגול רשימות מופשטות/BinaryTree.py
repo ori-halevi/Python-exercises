@@ -11,15 +11,17 @@ class BinaryTree(object):
     def search(self, root, value):
         pass
 
-    def insert(self, hhh, data):
-        if self.root is None:
-            self.root = TreeNode(data)
-            return
-        if data > self.root.data:
-            self.insert(self.root.right, data)
-        elif data < self.root.data:
-            self.insert(self.root.left, data)
+    def insert(self, data):
+        self.root = self.insert_rec(self.root, data)
 
+    def insert_rec(self, root, data) -> TreeNode:
+        if root is None:
+            return TreeNode(data)
+        elif data > root.data:
+            root.right = self.insert_rec(root.right, data)
+        elif data < root.data:
+            root.left = self.insert_rec(root.left, data)
+        return root
 
     def delete(self, root: TreeNode, data):
         pass
@@ -28,6 +30,7 @@ class BinaryTree(object):
         pass
 
 o = BinaryTree()
-o.insert(None, 8)
-o.insert(8, 9)
-print(o.root.data)
+o.insert(9)
+o.insert(11)
+print(o.root.right.data)
+print()
