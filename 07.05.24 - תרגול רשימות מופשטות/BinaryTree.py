@@ -6,10 +6,10 @@ class TreeNode(object):
 
 class BinaryTree(object):
     def __init__(self):
-        self.root = None
+        self._root = None
 
-    def search(self, value):
-        return self._search_recursive(self.root, value)
+    def search(self, number: int | float):
+        return self._search_recursive(self._root, number)
 
     def _search_recursive(self, root, value) -> object:
         if not root:
@@ -22,7 +22,7 @@ class BinaryTree(object):
             return self._search_recursive(root.right, value)
 
     def _search_location(self, value):
-        return self._search_location_recursive(self.root, value, self.root)
+        return self._search_location_recursive(self._root, value, self._root)
 
     def _search_location_recursive(self, root, value, branch) -> object:
         if not root:
@@ -36,8 +36,8 @@ class BinaryTree(object):
         elif root.data < value:
             return self._search_location_recursive(root.right, value, branch.right)
 
-    def insert(self, data):
-        self.root = self._insert_recursive(self.root, data)
+    def insert(self, number: int | float):
+        self._root = self._insert_recursive(self._root, number)
 
     def _insert_recursive(self, root, data) -> TreeNode:
         if root:
@@ -51,39 +51,49 @@ class BinaryTree(object):
             root.left = self._insert_recursive(root.left, data)
         return root
 
-    def delete(self, data):
-        if self.search(data):
-            temp_tree = self._ret_list_copy(data)
+    def delete(self, number: int | float):
+        if self.search(number):
+            temp_tree = self._ret_list_copy(number)
             for child in temp_tree[::-1]:
                 self._search_location(child).data = None
-            self._search_location(data).data = None
+            self._search_location(number).data = None
             for child in temp_tree:
                 self.insert(child)
 
     def _ret_list_copy(self, value):
-        self.temp_holder = list()
+        self._temp_holder = list()
         value_location = self._search_location(value)
         self._copy_to_temp_list(value_location)
-        return self.temp_holder
+        return self._temp_holder
 
     def _copy_to_temp_list(self, value_location):
         if not value_location.right and not value_location.left:
             return
         if value_location.right:
-            self.temp_holder.append(value_location.right.data)
+            self._temp_holder.append(value_location.right.data)
             self._copy_to_temp_list(value_location.right)
         if value_location.left:
-            self.temp_holder.append(value_location.left.data)
+            self._temp_holder.append(value_location.left.data)
             self._copy_to_temp_list(value_location.left)
 
+    def in_order(self):
+        self._in_order_recursive(self._root)
 
+    def _in_order_recursive(self, root):
+        if root:
+            if root.left:
+                self._in_order_recursive(root.left)
+            elif root.right:
+                print(root.data, end=" ")
+            if root.left and root.right:
+                print(root.data, end=" ")
+            if root.right:
+                self._in_order_recursive(root.right)
+            elif root.left:
+                print(root.data, end=" ")
+            if not root.left and not root.right:
+                print(root.data, end=" ")
 
-
-def in_order(root):
-    if root:
-        in_order(root.left)
-        print(root.data, end=" ")
-        in_order(root.right)
 
 
 def print_by_shape(root, level=0):
@@ -103,15 +113,15 @@ o.insert(16)
 o.insert(16.5)
 o.insert(14)
 o.insert(15)
-# print(o.root.right.data)
-print(o.search(3))
-print_by_shape(o.root)
+o.in_order()
+# print(o._root.right.data)
+# print(o.search(3))
+print_by_shape(o._root)
 
 o.delete(18)
 # o.delete(14)
 o.delete(16)
 
-
-in_order(o.root)
+o.in_order()
 print()
-print_by_shape(o.root)
+print_by_shape(o._root)
