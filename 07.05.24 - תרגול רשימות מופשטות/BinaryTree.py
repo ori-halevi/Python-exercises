@@ -4,6 +4,7 @@ class TreeNode(object):
         self.right = None
         self.left = None
 
+
 class BinaryTree(object):
     def __init__(self):
         self._root = None
@@ -95,33 +96,34 @@ class BinaryTree(object):
                 print(root.data, end=" ")
 
 
+if __name__ == "__main__":
+    def print_by_shape(root, level=0):
+        if root:
+            print_by_shape(root.right, level + 1)
+            print(" " * 5 * level + " --{" + str(root.data))
+            print_by_shape(root.left, level + 1)
 
-def print_by_shape(root, level=0):
-    if root:
-        print_by_shape(root.right, level + 1)
-        print(" " * 5 * level +" --{" + str(root.data))
-        print_by_shape(root.left, level + 1)
 
-o = BinaryTree()
-o.insert(9)
-o.insert(11)
-o.insert(18)
-o.insert(3)
-o.insert(30)
-o.insert(17)
-o.insert(16)
-o.insert(16.5)
-o.insert(14)
-o.insert(15)
-o.in_order()
-# print(o._root.right.data)
-# print(o.search(3))
-print_by_shape(o._root)
+    o = BinaryTree()
+    o.insert(9)
+    o.insert(11)
+    o.insert(18)
+    o.insert(3)
+    o.insert(30)
+    o.insert(17)
+    o.insert(16)
+    o.insert(16.5)
+    o.insert(14)
+    o.insert(15)
+    o.in_order()
+    # print(o._root.right.data)
+    # print(o.search(3))
+    print_by_shape(o._root)
 
-o.delete(18)
-# o.delete(14)
-o.delete(16)
+    o.delete(18)
+    # o.delete(14)
+    o.delete(16)
 
-o.in_order()
-print()
-print_by_shape(o._root)
+    o.in_order()
+    print()
+    print_by_shape(o._root)

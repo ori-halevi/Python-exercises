@@ -11,7 +11,7 @@ class Queue(object):
         return self._queue.pop(0)
 
     def head(self):
-        return self._queue.pe
+        return self._queue[0]
     def print_q(self):
         for i in self._queue:
             print(i)
@@ -26,3 +26,7 @@ if __name__ == "__main__":
 
     my_q = queue_negative([1, -2, 5, -8, 9])
     my_q.print_q()
+    my_q.enqueue(5)
+    print()
+    my_q.print_q()
+    print(my_q.head())
