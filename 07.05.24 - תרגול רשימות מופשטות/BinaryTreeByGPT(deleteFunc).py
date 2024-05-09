@@ -40,10 +40,7 @@ class BinaryTree(object):
         self.root = self._insert_recursive(self.root, data)
 
     def _insert_recursive(self, root, data) -> TreeNode:
-        if root:
-            if root.data is None:
-                return TreeNode(data)
-        if not root:
+        if root is None:
             return TreeNode(data)
         elif data > root.data:
             root.right = self._insert_recursive(root.right, data)
@@ -51,16 +48,22 @@ class BinaryTree(object):
             root.left = self._insert_recursive(root.left, data)
         return root
 
+    def _delete_recursive(self, root, value):
+        if root is None:
+            return None
+        elif value == root.data:
+            return None
+        elif value > root.data:
+            root.right = self._delete_recursive(root.right, value)
+        elif value < root.data:
+            root.left = self._delete_recursive(root.left, value)
+        return root
+
     def delete(self, data):
         if self.search(data):
-            temp_tree = self._ret_list_copy(data)
-            for child in temp_tree[::-1]:
-                self._search_location(child).data = None
-            self._search_location(data).data = None
-            for child in temp_tree:
-                self.insert(child)
+            self.root = self._delete_recursive(self.root, data)
 
-    def _ret_list_copy(self, value):
+    def ret_list_copy(self, value):
         self.temp_holder = list()
         value_location = self._search_location(value)
         self._copy_to_temp_list(value_location)
@@ -76,17 +79,13 @@ class BinaryTree(object):
             self.temp_holder.append(value_location.left.data)
             self._copy_to_temp_list(value_location.left)
 
-
-
-
 def in_order(root):
     if root:
         in_order(root.left)
         print(root.data, end=" ")
         in_order(root.right)
 
-
-def print_by_shape(root, level=0):
+def print_by_shape(root, level = 0):
     if root:
         print_by_shape(root.right, level + 1)
         print(" " * 5 * level +" --{" + str(root.data))
@@ -103,14 +102,10 @@ o.insert(16)
 o.insert(16.5)
 o.insert(14)
 o.insert(15)
-# print(o.root.right.data)
+
 print(o.search(3))
-print_by_shape(o.root)
-
+print(o.ret_list_copy(18))
 o.delete(18)
-# o.delete(14)
-o.delete(16)
-
 
 in_order(o.root)
 print()
