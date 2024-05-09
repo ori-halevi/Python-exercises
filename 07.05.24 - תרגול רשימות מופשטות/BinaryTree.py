@@ -8,8 +8,18 @@ class BinaryTree(object):
     def __init__(self):
         self.root = None
 
-    def search(self, root, value):
-        pass
+    def search(self, value):
+        return self.search_rec(self.root, value)
+
+    def search_rec(self, root, value) -> object:
+        if not root:
+            return False
+        elif value == root.data:
+            return True
+        elif root.data > value:
+            return self.search_rec(root.left, value)
+        elif root.data < value:
+            return self.search_rec(root.right, value)
 
     def insert(self, data):
         self.root = self.insert_rec(self.root, data)
@@ -32,5 +42,8 @@ class BinaryTree(object):
 o = BinaryTree()
 o.insert(9)
 o.insert(11)
-print(o.root.right.data)
+o.insert(18)
+o.insert(3)
+# print(o.root.right.data)
 print()
+print(o.search(3))
