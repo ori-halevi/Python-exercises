@@ -87,9 +87,19 @@ class LinkedList(object):
             current = current.next
         return temp_list
 
+    def average(self):
+        if not self.head:
+            return 0
+        count = 0
+        sum = 0
+        node = self.head
+        while node:
+            sum += node.data
+            node = node.next
+            count += 1
+        return sum
 
 if __name__ == "__main__":
-
     ob = LinkedList()
     print(ob.print_ll())
     print(ob.is_empty())
@@ -107,3 +117,4 @@ if __name__ == "__main__":
     print("all:", ob.get_ll())
     print("pop tail:", ob.pop_at_tail())
     print("all:", ob.get_ll())
+    print(ob.average())

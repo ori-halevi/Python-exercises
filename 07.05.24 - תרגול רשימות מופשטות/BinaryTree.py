@@ -51,7 +51,7 @@ class BinaryTree(object):
     def delete(self, data):
         if self.search(data):
             temp_tree = self.ret_list_copy(data)
-            self._search_location(data) = None
+            self._search_location(data).data = None
 
     def ret_list_copy(self, value):
         self.temp_holder = list()
