@@ -24,20 +24,21 @@ class BinaryTree(object):
     def search_location(self, value):
         return self.search_location_rec(self.root, value, self.root)
 
-    def search_location_rec(self, root, value, branch) -> object:
-        # location = "root"
+    def search_location_rec(self, root, value, branch="") -> object:
+        location = "root"
         if not root:
             location = "Not Found"
             return location
         elif value == root.data:
-            location = branch.data
+            location = (location +
+                        branch + ".data")
             return location
         elif root.data > value:
             # location = location + ".left"
-            return self.search_location_rec(root.left, value, branch.left)
+            return self.search_location_rec(root.left, value, branch + ".left")
         elif root.data < value:
             # location = location + ".right"
-            return self.search_location_rec(root.right, value, branch.right)
+            return self.search_location_rec(root.right, value, branch + ".right")
 
     def insert(self, data):
         self.root = self.insert_rec(self.root, data)
@@ -95,5 +96,5 @@ o.insert(17)
 # print(o.root.right.data)
 print()
 print(o.search(3))
-print(o.search_location(17))
+print(o.search_location(18))
 # print(o.ret_list_copy(11))
