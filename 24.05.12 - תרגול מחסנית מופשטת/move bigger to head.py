@@ -3,6 +3,9 @@ def move_bigger_to_head(some_stack: StackClassUsingLinkedList.Stack):
     new_stack = StackClassUsingLinkedList.Stack()
     bigger = some_stack.peek()
     while some_stack.peek() is not None:
+        new_stack.push(some_stack.pop())
+
+
         i = some_stack.pop()
         if some_stack.peek():
             if i > some_stack.peek():

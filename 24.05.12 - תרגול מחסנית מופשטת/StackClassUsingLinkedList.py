@@ -8,7 +8,7 @@ class Stack(object):
         self.stack.add_at_head(value)
 
     def pop(self):
-        self.stack.pop_at_head()
+        return self.stack.pop_at_head()
 
     def peek(self):
         return self.stack.get_head()
