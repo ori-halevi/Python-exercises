@@ -8,7 +8,7 @@ class Stack(object):
         self.stack.add_at_head(value)
 
     def pop(self):
-        self.stack.pop_at_head()
+        return self.stack.pop_at_head()
 
     def peek(self):
         return self.stack.get_head()
@@ -34,24 +34,26 @@ class Stack(object):
     def __str__(self):
         return str(self.stack.get_ll())
 
-ob = Stack()
-ob.push(4)
-print(ob)
-ob.pop()
-print(ob)
-ob.peek()
-print(ob)
-print(ob.is_empty())
 
-ob.push(6)
-print(ob)
-ob.push(7)
-print(ob)
-ob.push(8)
-print(ob)
-ob.push(9)
-print(ob)
-ob.push(10)
-print(ob)
-print("...")
-print(ob.flip())
+if __name__ == "__main__":
+    ob = Stack()
+    ob.push(4)
+    print(ob)
+    ob.pop()
+    print(ob)
+    ob.peek()
+    print(ob)
+    print(ob.is_empty())
+
+    ob.push(6)
+    print(ob)
+    ob.push(7)
+    print(ob)
+    ob.push(8)
+    print(ob)
+    ob.push(9)
+    print(ob)
+    ob.push(10)
+    print(ob)
+    print("...")
+    print(ob.flip())
