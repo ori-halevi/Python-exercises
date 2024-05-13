@@ -1,6 +1,3 @@
-"""
-Temp file
-"""
 
 def merge(arr1, arr2):
     nl = []
